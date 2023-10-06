@@ -14,11 +14,15 @@ import {
   Box,
   AbsoluteCenter,
   Divider,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { useToast } from "../../../shared/hooks/useToast";
+import { useAuth } from "../../../modules/auth/authHooks";
+import { useCookieStore } from "../../../modules/cookies/cookieStore";
+import { useRouter } from "next/router";
 
 type FormData = {
   username: string;
@@ -26,13 +30,19 @@ type FormData = {
 };
 
 export const LoginForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     defaultValues: {
       password: "",
       username: "",
     },
   });
+
   const { toast } = useToast();
   const noToast = useCallback(() => {
     toast({
@@ -43,8 +53,28 @@ export const LoginForm = () => {
     });
   }, []);
 
+  const { setCookie } = useCookieStore();
+  const { mutateAsync: login } = useAuth({
+    onSuccess: (data) => {
+      setCookie("token", data.token);
+      router.replace("/");
+    },
+    onError: () => {
+      toast({
+        id: "error-login",
+        title: "Error",
+        description: "Something is wrong. Try again later",
+        status: "error",
+      });
+    },
+  });
+
   return (
-    <form onSubmit={handleSubmit((e) => alert(JSON.stringify({ e })))}>
+    <form
+      onSubmit={handleSubmit((e: FormData) => {
+        return login({ username: e.username, password: e.password });
+      })}
+    >
       <Center w="100%" h="100vh">
         <VStack spacing="1rem" w="50%" align="start">
           <VStack align="start" spacing={0}>
@@ -57,7 +87,7 @@ export const LoginForm = () => {
           </VStack>
 
           {/* USERNAME */}
-          <FormControl>
+          <FormControl isInvalid={!!errors.username}>
             <FormLabel>Username</FormLabel>
             <Input
               type="text"
@@ -69,10 +99,11 @@ export const LoginForm = () => {
                 },
               })}
             />
+            <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
           </FormControl>
 
           {/* PASSWORD */}
-          <FormControl>
+          <FormControl isInvalid={!!errors.password}>
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
@@ -98,13 +129,14 @@ export const LoginForm = () => {
             <FormHelperText>
               We'll never share your password. Promise. {"(wink)"}
             </FormHelperText>
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
 
           <Button w="100%" colorScheme="blue" type="submit">
             Login
           </Button>
 
-          <Text>
+          <Text as="b">
             Don't have an account?{" "}
             <Text
               textDecor="underline"

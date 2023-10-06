@@ -1,5 +1,13 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { LoginForm } from "../uikit/containers/login/LoginForm";
+import dynamic from "next/dynamic";
+
+const LoginForm = dynamic(
+  () =>
+    import("../uikit/containers/login/LoginForm").then(
+      (comp) => comp.LoginForm
+    ),
+  { ssr: false }
+);
 
 const LoginPage = () => {
   return (
@@ -8,6 +16,12 @@ const LoginPage = () => {
       <LoginForm />
     </SimpleGrid>
   );
+};
+
+export const getStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default LoginPage;
