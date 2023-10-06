@@ -19,9 +19,9 @@ import {
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { useToast } from "../../../shared/hooks/useToast";
-import { useAuth } from "../../../modules/auth/authHooks";
-import { useCookieStore } from "../../../modules/cookies/cookieStore";
+import { useToast } from "../../../../shared/hooks/useToast";
+import { useAuth } from "../../../../modules/auth/authHooks";
+import { useCookieStore } from "../../../../modules/cookies/cookieStore";
 import { useRouter } from "next/router";
 
 type FormData = {
@@ -132,7 +132,12 @@ export const LoginForm = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button w="100%" colorScheme="blue" type="submit">
+          <Button
+            w="100%"
+            colorScheme="blue"
+            type="submit"
+            aria-label="login button"
+          >
             Login
           </Button>
 
