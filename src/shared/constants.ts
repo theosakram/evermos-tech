@@ -1,3 +1,3 @@
 export const queryKeys = {
-  AUTH: "auth",
+  AUTH: 'auth',
 };

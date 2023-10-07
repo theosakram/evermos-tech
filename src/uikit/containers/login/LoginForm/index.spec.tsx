@@ -1,15 +1,17 @@
-import { render } from "@testing-library/react";
-import { LoginForm } from ".";
-import { QueryProvider } from "@/providers/QueryProvider";
+import { render } from '@testing-library/react';
 
-jest.mock("next/config", () => ({
+import { QueryProvider } from '@/providers/QueryProvider';
+
+import { LoginForm } from '.';
+
+jest.mock('next/config', () => ({
   publicRuntimeConfig: {
-    BASE_URL: "https://fakestoreapi.com",
-    BASE_SOURCE: "/api-evermos",
+    BASE_URL: 'https://fakestoreapi.com',
+    BASE_SOURCE: '/api-evermos',
   },
 }));
 
-jest.mock("next/router", () => jest.requireActual("next-router-mock"));
+jest.mock('next/router', () => jest.requireActual('next-router-mock'));
 
 const comp = (
   <QueryProvider>
@@ -17,8 +19,8 @@ const comp = (
   </QueryProvider>
 );
 
-describe("Login Form", () => {
-  it("renders successfully", () => {
+describe('Login Form', () => {
+  it('renders successfully', () => {
     const { baseElement } = render(comp);
     expect(baseElement).toBeTruthy();
   });

@@ -1,28 +1,31 @@
-import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import {
+  AbsoluteCenter,
+  Box,
+  Button,
   Center,
-  VStack,
+  Divider,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
+  IconButton,
   Input,
   InputGroup,
   InputRightElement,
-  IconButton,
-  FormHelperText,
-  Button,
   Text,
-  Box,
-  AbsoluteCenter,
-  Divider,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-import { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { useRouter } from "next/router";
-import { useToast } from "@/shared/hooks/useToast";
-import { useCookieStore } from "@/modules/cookies/cookieStore";
-import { useAuth } from "@/modules/auth/authHooks";
+  VStack,
+} from '@chakra-ui/react';
+import { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FcGoogle } from 'react-icons/fc';
+
+import { useRouter } from 'next/router';
+
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+
+import { useAuth } from '@/modules/auth/authHooks';
+import { useCookieStore } from '@/modules/cookies/cookieStore';
+import { useToast } from '@/shared/hooks/useToast';
 
 type FormData = {
   username: string;
@@ -38,33 +41,33 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues: {
-      password: "",
-      username: "",
+      password: '',
+      username: '',
     },
   });
 
   const { toast } = useToast();
   const noToast = useCallback(() => {
     toast({
-      id: "no-toast",
-      title: "NO",
-      description: "Nope",
-      status: "error",
+      id: 'no-toast',
+      title: 'NO',
+      description: 'Nope',
+      status: 'error',
     });
   }, [toast]);
 
   const { setCookie } = useCookieStore();
   const { mutateAsync: login } = useAuth({
     onSuccess: (data) => {
-      setCookie("token", data.token);
-      router.replace("/");
+      setCookie('token', data.token);
+      router.replace('/');
     },
     onError: () => {
       toast({
-        id: "error-login",
-        title: "Error",
-        description: "Something is wrong. Try again later",
-        status: "error",
+        id: 'error-login',
+        title: 'Error',
+        description: 'Something is wrong. Try again later',
+        status: 'error',
       });
     },
   });
@@ -92,9 +95,9 @@ export const LoginForm = () => {
             <Input
               type="text"
               placeholder="bestUsername420"
-              {...register("username", {
+              {...register('username', {
                 required: {
-                  message: "Cannot be empty",
+                  message: 'Cannot be empty',
                   value: true,
                 },
               })}
@@ -107,11 +110,11 @@ export const LoginForm = () => {
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="********"
-                {...register("password", {
+                {...register('password', {
                   required: {
-                    message: "Cannot be empty",
+                    message: 'Cannot be empty',
                     value: true,
                   },
                 })}
@@ -127,22 +130,17 @@ export const LoginForm = () => {
             </InputGroup>
 
             <FormHelperText>
-              We&apos;ll never share your password. Promise. {"(wink)"}
+              We&apos;ll never share your password. Promise. {'(wink)'}
             </FormHelperText>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button
-            w="100%"
-            colorScheme="blue"
-            type="submit"
-            aria-label="login button"
-          >
+          <Button w="100%" colorScheme="blue" type="submit" aria-label="login button">
             Login
           </Button>
 
           <Text as="b">
-            Don&apos;t have an account?{" "}
+            Don&apos;t have an account?{' '}
             <Text
               textDecor="underline"
               display="inline"
@@ -151,7 +149,7 @@ export const LoginForm = () => {
               onClick={noToast}
             >
               Sign Up
-            </Text>{" "}
+            </Text>{' '}
           </Text>
 
           {/* DIVIDER */}

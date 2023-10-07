@@ -1,12 +1,10 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
+import { Box, SimpleGrid } from '@chakra-ui/react';
+
+import dynamic from 'next/dynamic';
 
 const LoginForm = dynamic(
-  () =>
-    import("../uikit/containers/login/LoginForm").then(
-      (comp) => comp.LoginForm
-    ),
-  { ssr: false }
+  () => import('../uikit/containers/login/LoginForm').then((comp) => comp.LoginForm),
+  { ssr: false },
 );
 
 const LoginPage = () => {

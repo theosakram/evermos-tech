@@ -1,4 +1,4 @@
-import { getEnv } from "./getEnv";
+import { getEnv } from './getEnv';
 
 export type FetcherProps = {
   url: string;
@@ -21,8 +21,8 @@ export const fetcher = async <T>(props: FetcherProps): Promise<T> => {
     const res = await fetch(url, {
       ...props.params,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     });
 

@@ -1,6 +1,6 @@
-import type { UseToastOptions as ChakraToastProps } from "@chakra-ui/react";
-import { useToast as useChakraToast } from "@chakra-ui/react";
-import { useCallback } from "react";
+import type { UseToastOptions as ChakraToastProps } from '@chakra-ui/react';
+import { useToast as useChakraToast } from '@chakra-ui/react';
+import { useCallback } from 'react';
 
 export type ToastProps = ChakraToastProps;
 
@@ -11,7 +11,7 @@ export const useToast = () => {
   const toast = useChakraToast({
     duration: 3000,
     isClosable: true,
-    position: "bottom",
+    position: 'bottom',
   });
 
   const fireToast = useCallback(
@@ -21,7 +21,7 @@ export const useToast = () => {
         toast(props);
       }
     },
-    [toast]
+    [toast],
   );
 
   return {

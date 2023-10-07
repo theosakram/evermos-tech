@@ -1,8 +1,9 @@
-import { render } from "@testing-library/react";
-import { Loader } from ".";
+import { render } from '@testing-library/react';
 
-describe("Loader", () => {
-  it("renders successfully", () => {
+import { Loader } from '.';
+
+describe('Loader', () => {
+  it('renders successfully', () => {
     const { baseElement } = render(<Loader />);
     expect(baseElement).toBeTruthy();
   });

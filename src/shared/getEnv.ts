@@ -1,4 +1,4 @@
-import nextGetConfig from "next/config";
+import nextGetConfig from 'next/config';
 
 interface Config {
   serverRuntimeConfig: {

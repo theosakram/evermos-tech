@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from "react";
-import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
+import type { PropsWithChildren } from 'react';
+import { QueryCache, QueryClient, QueryClientProvider } from 'react-query';
 
 const queryCache = new QueryCache();
 export const queryClient = new QueryClient({
@@ -15,9 +15,5 @@ export const queryClient = new QueryClient({
 });
 
 export const QueryProvider = (props: PropsWithChildren) => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      {props.children}
-    </QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{props.children}</QueryClientProvider>;
 };
