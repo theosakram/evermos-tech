@@ -23,6 +23,8 @@ export type ProductCardProps = {
   description: string;
   price: number;
   id: number;
+  onCartButtonClick?: () => void;
+  onBuyBuyNowButtonClick?: () => void;
 };
 
 export const ProductCard = (props: ProductCardProps) => {
@@ -56,12 +58,22 @@ export const ProductCard = (props: ProductCardProps) => {
 
               <ButtonGroup>
                 <IconButton
+                  type="button"
                   aria-label="add-to-cart"
                   icon={<Icon as={AiOutlineShoppingCart} />}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    props.onCartButtonClick?.();
+                  }}
                 />
                 <IconButton
+                  type="button"
                   aria-label="buy-now"
                   icon={<Icon as={IoBagCheckOutline} />}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    props.onBuyBuyNowButtonClick?.();
+                  }}
                   colorScheme="blue"
                 />
               </ButtonGroup>

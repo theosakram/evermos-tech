@@ -75,8 +75,9 @@ export const LoginForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((e: FormData) => {
-        return login({ username: e.username, password: e.password });
+      onSubmit={handleSubmit(async (e: FormData) => {
+        await login({ username: e.username, password: e.password });
+        return setCookie('userName', e.username);
       })}
     >
       <Center w="100%" h="100vh">
@@ -94,6 +95,7 @@ export const LoginForm = () => {
           <FormControl isInvalid={!!errors.username}>
             <FormLabel>Username</FormLabel>
             <Input
+              bg="white"
               type="text"
               placeholder="bestUsername420"
               {...register('username', {
@@ -111,6 +113,7 @@ export const LoginForm = () => {
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
+                bg="white"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="********"
                 {...register('password', {
@@ -126,6 +129,7 @@ export const LoginForm = () => {
                   aria-label="show-password"
                   icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                   onClick={() => setShowPassword(!showPassword)}
+                  bg="gray.200"
                 />
               </InputRightElement>
             </InputGroup>
@@ -163,7 +167,7 @@ export const LoginForm = () => {
           {/* DIVIDER */}
           <Box position="relative" w="100%" my="1rem">
             <Divider borderColor="gray.300" />
-            <AbsoluteCenter bg="white" px="4">
+            <AbsoluteCenter bg="gray.100" px="4">
               OR
             </AbsoluteCenter>
           </Box>
@@ -175,6 +179,7 @@ export const LoginForm = () => {
             border="1px solid"
             borderColor="gray.200"
             onClick={noToast}
+            bg="white"
           >
             Authorize with Google
           </Button>

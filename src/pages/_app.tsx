@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 import { QueryProvider } from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
-import { NavbarContainer } from '@/uikit/containers/navbar';
+import { NavbarContainer } from '@/uikit/containers/navbarContainer';
 
 const LoginGuard = dynamic(
   () =>

@@ -1,11 +1,13 @@
 import { SimpleGrid, VStack } from '@chakra-ui/react';
 
+import { useCartStore } from '@/modules/cart/cartStore';
 import { useGetAllProducts } from '@/modules/products/productHooks';
 import { Loader } from '@/uikit/components/Loader';
 import { ProductCard } from '@/uikit/components/ProductCard';
 
 export const ProductsContainer = () => {
   const { data, isLoading } = useGetAllProducts();
+  const { addProduct } = useCartStore();
 
   if (isLoading) {
     return <Loader />;
@@ -22,6 +24,7 @@ export const ProductsContainer = () => {
             title={datum.title}
             description={datum.description}
             price={datum.price}
+            onCartButtonClick={() => addProduct(datum)}
           />
         ))}
       </SimpleGrid>

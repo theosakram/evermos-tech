@@ -1,11 +1,17 @@
 import { useMemo } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { useGetAllCategories } from '@/modules/categories/categoriesHooks';
 import type { NavbarProps } from '@/uikit/components/Navbar';
 import { Navbar } from '@/uikit/components/Navbar';
 
 export const NavbarContainer = () => {
-  const { data } = useGetAllCategories();
+  const router = useRouter();
+  const { data } = useGetAllCategories({
+    enabled: router.pathname !== '/login',
+  });
+
   const mappedCategoriesData = useMemo((): NavbarProps['navs'] => {
     if (data) {
       return data.map((datum) => ({
@@ -20,5 +26,9 @@ export const NavbarContainer = () => {
     return [];
   }, [data]);
 
-  return <Navbar navs={mappedCategoriesData} />;
+  if (router.pathname !== '/login') {
+    return <Navbar navs={mappedCategoriesData} />;
+  }
+
+  return null;
 };

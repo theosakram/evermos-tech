@@ -5,6 +5,7 @@ import type { AuthResponse } from '../auth/authTypes';
 
 type CookieType = AuthResponse & {
   isLoggedIn: 'true' | 'false';
+  userName: string;
 };
 
 export const cookie = new Cookie();

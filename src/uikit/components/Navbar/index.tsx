@@ -84,10 +84,12 @@ export const Navbar = (props: NavbarProps) => {
           direction={'row'}
           spacing={6}
         >
-          <IconButton
-            aria-label="add-to-cart"
-            icon={<Icon as={AiOutlineShoppingCart} />}
-          />
+          <Link passHref href={{ pathname: '/cart' }}>
+            <IconButton
+              aria-label="add-to-cart"
+              icon={<Icon as={AiOutlineShoppingCart} />}
+            />
+          </Link>
         </Stack>
       </Flex>
 
