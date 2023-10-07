@@ -6,6 +6,7 @@ import Head from 'next/head';
 
 import { QueryProvider } from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { NavbarContainer } from '@/uikit/containers/navbar';
 
 const LoginGuard = dynamic(
   () =>
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryProvider>
           <LoginGuard>
             <Box w="100%" minH="100vh" bg="gray.100">
+              <NavbarContainer />
               <Component {...pageProps} />
             </Box>
           </LoginGuard>

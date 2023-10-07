@@ -18,3 +18,7 @@ export type GetAllProductRequest = {
   limit?: number;
   sort?: 'asc' | 'desc';
 };
+
+export type GetProductByIdRequest = {
+  id: number;
+};

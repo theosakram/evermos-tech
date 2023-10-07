@@ -3,10 +3,12 @@ import { useQuery } from 'react-query';
 
 import { queryKeys } from '@/shared/constants';
 
-import { getALlProducts } from './productServices';
+import { getALlProducts, getProductById } from './productServices';
 import type {
   GetAllProductRequest,
   GetAllProductResponse,
+  GetProductByIdRequest,
+  Product,
 } from './productTypes';
 
 export const useGetAllProducts = (
@@ -21,6 +23,22 @@ export const useGetAllProducts = (
   return useQuery(
     [queryKeys.GET_ALL_PRODUCTS, payload],
     () => getALlProducts(payload),
+    options,
+  );
+};
+
+export const useGetProductById = (
+  payload: GetProductByIdRequest,
+  options?: UseQueryOptions<
+    Product,
+    unknown,
+    Product,
+    Array<string | GetProductByIdRequest>
+  >,
+) => {
+  return useQuery(
+    [queryKeys.GET_PRODUCT_BY_ID, payload],
+    () => getProductById(payload),
     options,
   );
 };
