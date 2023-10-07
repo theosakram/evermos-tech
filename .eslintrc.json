@@ -3,8 +3,7 @@
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -13,10 +12,10 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "react",
     "eslint-plugin-import",
+    "react",
+    "eslint-plugin-prettier",
     "eslint-plugin-jsx-a11y",
-    "eslint-config-prettier",
     "eslint-plugin-react-hooks"
   ],
   "overrides": [
@@ -24,10 +23,9 @@
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
         "dot-notation": 2,
-        "@typescript-eslint/consistent-type-exports": 1,
-        "@typescript-eslint/consistent-type-imports": 1,
+        "@typescript-eslint/consistent-type-exports": "warn",
+        "@typescript-eslint/consistent-type-imports": "warn",
         "no-duplicate-case": 1,
-        "no-duplicate-imports": 1,
         "prefer-const": 1,
         "eqeqeq": ["error", "always"]
       }

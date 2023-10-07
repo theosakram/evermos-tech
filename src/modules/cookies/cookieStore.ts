@@ -12,7 +12,11 @@ export const cookie = new Cookie();
 export const useCookieStore = () => {
   const browserCookie = cookie.getAll<CookieType>();
 
-  const setCookie = (key: keyof CookieType, value: string, options?: CookieSetOptions) => {
+  const setCookie = (
+    key: keyof CookieType,
+    value: string,
+    options?: CookieSetOptions,
+  ) => {
     return cookie.set(key, value, options);
   };
 

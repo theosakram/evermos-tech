@@ -1,9 +1,13 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import type { UseQueryOptions } from 'react-query';
+import { useQuery } from 'react-query';
 
 import { queryKeys } from '@/shared/constants';
 
 import { getALlProducts } from './productServices';
-import { GetAllProductRequest, GetAllProductResponse } from './productTypes';
+import type {
+  GetAllProductRequest,
+  GetAllProductResponse,
+} from './productTypes';
 
 export const useGetAllProducts = (
   payload?: GetAllProductRequest,
@@ -14,5 +18,9 @@ export const useGetAllProducts = (
     Array<string | GetAllProductRequest>
   >,
 ) => {
-  return useQuery([queryKeys.GET_ALL_PRODUCTS, payload], () => getALlProducts(payload), options);
+  return useQuery(
+    [queryKeys.GET_ALL_PRODUCTS, payload],
+    () => getALlProducts(payload),
+    options,
+  );
 };
