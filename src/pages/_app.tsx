@@ -1,8 +1,9 @@
 import Head from "next/head";
-import { QueryProvider } from "../providers/QueryProvider";
-import { ThemeProvider } from "../providers/ThemeProvider";
+
 import { AppProps } from "next/app";
 import dynamic from "next/dynamic";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
 
 const LoginGuard = dynamic(
   () =>

@@ -1,7 +1,8 @@
 import { PropsWithChildren, useEffect } from "react";
-import { useCookieStore } from "../../../modules/cookies/cookieStore";
+
 import { useRouter } from "next/router";
 import { Loader } from "../Loader";
+import { useCookieStore } from "@/modules/cookies/cookieStore";
 
 export const LoginGuard = (props: PropsWithChildren) => {
   const router = useRouter();

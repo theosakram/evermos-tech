@@ -1,4 +1,4 @@
-import { fetcher } from "../../shared/fetcher";
+import { fetcher } from "@/shared/fetcher";
 import { AuthRequest, AuthResponse } from "./authTypes";
 
 export const postLogin = (payload: AuthRequest) => {

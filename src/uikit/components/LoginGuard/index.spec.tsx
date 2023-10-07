@@ -1,7 +1,7 @@
 import { render, renderHook, act, waitFor } from "@testing-library/react";
 import { LoginGuard } from ".";
 import mockRouter from "next-router-mock";
-import { useCookieStore } from "../../../modules/cookies/cookieStore";
+import { useCookieStore } from "@/modules/cookies/cookieStore";
 
 jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 

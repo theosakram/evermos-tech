@@ -19,10 +19,10 @@ import {
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { useToast } from "../../../../shared/hooks/useToast";
-import { useAuth } from "../../../../modules/auth/authHooks";
-import { useCookieStore } from "../../../../modules/cookies/cookieStore";
 import { useRouter } from "next/router";
+import { useToast } from "@/shared/hooks/useToast";
+import { useCookieStore } from "@/modules/cookies/cookieStore";
+import { useAuth } from "@/modules/auth/authHooks";
 
 type FormData = {
   username: string;
