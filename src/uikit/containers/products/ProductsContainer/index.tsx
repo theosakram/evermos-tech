@@ -1,10 +1,15 @@
 import { SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { useGetAllProducts } from '@/modules/products/productHooks';
+import { Loader } from '@/uikit/components/Loader';
 import { ProductCard } from '@/uikit/components/ProductCard';
 
 export const ProductsContainer = () => {
-  const { data } = useGetAllProducts();
+  const { data, isLoading } = useGetAllProducts();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <VStack w="100%" p="1rem" spacing="1rem">

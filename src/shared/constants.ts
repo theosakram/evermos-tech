@@ -4,4 +4,7 @@ export const queryKeys = {
 
   // products
   GET_ALL_PRODUCTS: 'get-all-products',
+
+  // categories
+  GET_ALL_CATEGORIES: 'get-all-categories',
 };

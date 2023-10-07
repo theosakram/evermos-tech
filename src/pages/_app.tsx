@@ -1,3 +1,5 @@
+import { Box } from '@chakra-ui/react';
+
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -6,7 +8,8 @@ import { QueryProvider } from '@/providers/QueryProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 
 const LoginGuard = dynamic(
-  () => import('../uikit/components/LoginGuard').then((comp) => comp.LoginGuard),
+  () =>
+    import('../uikit/components/LoginGuard').then((comp) => comp.LoginGuard),
   { ssr: false },
 );
 
@@ -19,7 +22,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <QueryProvider>
           <LoginGuard>
-            <Component {...pageProps} />
+            <Box w="100%" minH="100vh" bg="gray.100">
+              <Component {...pageProps} />
+            </Box>
           </LoginGuard>
         </QueryProvider>
       </ThemeProvider>
