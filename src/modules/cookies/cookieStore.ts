@@ -1,5 +1,6 @@
-import Cookie, { CookieSetOptions } from "universal-cookie";
-import { AuthResponse } from "../auth/authTypes";
+import type { CookieSetOptions } from "universal-cookie";
+import Cookie from "universal-cookie";
+import type { AuthResponse } from "../auth/authTypes";
 
 export const cookie = new Cookie();
 export const useCookieStore = () => {

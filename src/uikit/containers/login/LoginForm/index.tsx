@@ -51,7 +51,7 @@ export const LoginForm = () => {
       description: "Nope",
       status: "error",
     });
-  }, []);
+  }, [toast]);
 
   const { setCookie } = useCookieStore();
   const { mutateAsync: login } = useAuth({
@@ -127,7 +127,7 @@ export const LoginForm = () => {
             </InputGroup>
 
             <FormHelperText>
-              We'll never share your password. Promise. {"(wink)"}
+              We&apos;ll never share your password. Promise. {"(wink)"}
             </FormHelperText>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
@@ -142,7 +142,7 @@ export const LoginForm = () => {
           </Button>
 
           <Text as="b">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Text
               textDecor="underline"
               display="inline"

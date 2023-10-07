@@ -15,21 +15,19 @@ const {
  * e.g "/doctors"
  */
 export const fetcher = async <T>(props: FetcherProps): Promise<T> => {
-  return new Promise(async (resolve, reject) => {
-    const url = defaultSource + props.url + new URLSearchParams(props.query);
+  const url = defaultSource + props.url + new URLSearchParams(props.query);
 
-    try {
-      const res = await fetch(url, {
-        ...props.params,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+  try {
+    const res = await fetch(url, {
+      ...props.params,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
 
-      return resolve(res.json());
-    } catch (err) {
-      return reject(err);
-    }
-  });
+    return res.json();
+  } catch (err) {
+    return err;
+  }
 };

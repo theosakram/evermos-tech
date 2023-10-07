@@ -1,5 +1,5 @@
-import { PropsWithChildren, useEffect } from "react";
-
+import type { PropsWithChildren } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Loader } from "../Loader";
 import { useCookieStore } from "@/modules/cookies/cookieStore";

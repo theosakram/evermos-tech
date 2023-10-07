@@ -1,6 +1,6 @@
 import theme from "@/uikit/theme";
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 export const ThemeProvider = (props: PropsWithChildren) => {
   return (

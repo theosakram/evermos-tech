@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { QueryProvider } from "@/providers/QueryProvider";
