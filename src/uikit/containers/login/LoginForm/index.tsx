@@ -57,9 +57,10 @@ export const LoginForm = () => {
   }, [toast]);
 
   const { setCookie } = useCookieStore();
-  const { mutateAsync: login } = useAuth({
+  const { mutateAsync: login, isLoading: loginLoading } = useAuth({
     onSuccess: (data) => {
       setCookie('token', data.token);
+      setCookie('isLoggedIn', 'true');
       router.replace('/');
     },
     onError: () => {
@@ -135,7 +136,14 @@ export const LoginForm = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
 
-          <Button w="100%" colorScheme="blue" type="submit" aria-label="login button">
+          <Button
+            w="100%"
+            colorScheme="blue"
+            type="submit"
+            aria-label="login button"
+            isLoading={loginLoading}
+            isDisabled={loginLoading}
+          >
             Login
           </Button>
 

@@ -3,11 +3,16 @@ import Cookie from 'universal-cookie';
 
 import type { AuthResponse } from '../auth/authTypes';
 
-export const cookie = new Cookie();
-export const useCookieStore = () => {
-  const browserCookie = cookie.getAll<AuthResponse>();
+type CookieType = AuthResponse & {
+  isLoggedIn: 'true' | 'false';
+};
 
-  const setCookie = (key: keyof AuthResponse, value: string, options?: CookieSetOptions) => {
+export const cookie = new Cookie();
+
+export const useCookieStore = () => {
+  const browserCookie = cookie.getAll<CookieType>();
+
+  const setCookie = (key: keyof CookieType, value: string, options?: CookieSetOptions) => {
     return cookie.set(key, value, options);
   };
 
