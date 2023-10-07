@@ -64,14 +64,16 @@ export const Navbar = (props: NavbarProps) => {
           justify={{ base: 'center', md: 'start' }}
           align="center"
         >
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}
-            as="b"
-          >
-            LOGO
-          </Text>
+          <Link passHref href={{ pathname: '/' }}>
+            <Text
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+              fontFamily={'heading'}
+              color={useColorModeValue('gray.800', 'white')}
+              as="b"
+            >
+              LOGO
+            </Text>
+          </Link>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav navs={props.navs} />
@@ -88,6 +90,7 @@ export const Navbar = (props: NavbarProps) => {
             <IconButton
               aria-label="add-to-cart"
               icon={<Icon as={AiOutlineShoppingCart} />}
+              colorScheme="blue"
             />
           </Link>
         </Stack>

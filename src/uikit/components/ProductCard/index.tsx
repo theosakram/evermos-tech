@@ -8,6 +8,11 @@ import {
   Icon,
   IconButton,
   Img,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Spacer,
   Stack,
   Text,
@@ -23,6 +28,12 @@ export type ProductCardProps = {
   description: string;
   price: number;
   id: number;
+  inCart?: {
+    status: boolean;
+    amount: number;
+    onIncClick: () => void;
+    onDecClick: () => void;
+  };
   onCartButtonClick?: () => void;
   onBuyBuyNowButtonClick?: () => void;
 };
@@ -57,15 +68,43 @@ export const ProductCard = (props: ProductCardProps) => {
               <Spacer />
 
               <ButtonGroup>
-                <IconButton
-                  type="button"
-                  aria-label="add-to-cart"
-                  icon={<Icon as={AiOutlineShoppingCart} />}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    props.onCartButtonClick?.();
-                  }}
-                />
+                {props.inCart.status ? (
+                  <NumberInput
+                    value={props.inCart.amount}
+                    min={0}
+                    max={99}
+                    w="5rem"
+                    onFocus={(e) => e.preventDefault()}
+                    onClick={(e) => e.preventDefault()}
+                    isReadOnly
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper
+                        onClick={(e) => {
+                          e.preventDefault();
+                          props.inCart.onIncClick();
+                        }}
+                      />
+                      <NumberDecrementStepper
+                        onClick={(e) => {
+                          e.preventDefault();
+                          props.inCart.onDecClick();
+                        }}
+                      />
+                    </NumberInputStepper>
+                  </NumberInput>
+                ) : (
+                  <IconButton
+                    type="button"
+                    aria-label="add-to-cart"
+                    icon={<Icon as={AiOutlineShoppingCart} />}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      props.onCartButtonClick?.();
+                    }}
+                  />
+                )}
                 <IconButton
                   type="button"
                   aria-label="buy-now"
