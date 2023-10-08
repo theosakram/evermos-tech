@@ -1,39 +1,52 @@
-# Example app with [chakra-ui](https://github.com/chakra-ui/chakra-ui) and TypeScript
+# Evermos Tech
 
-This example features how to use [chakra-ui](https://github.com/chakra-ui/chakra-ui) as the component library within a Next.js app with TypeScript.
+Technical test for evermos
 
-Next.js and chakra-ui have built-in TypeScript declarations, so we'll get autocompletion for their modules straight away.
+## Running on your local
 
-We are connecting the Next.js `_app.js` with `chakra-ui`'s Provider and theme so the pages can have app-wide dark/light mode. We are also creating some components which shows the usage of `chakra-ui`'s style props.
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-chakra-ui)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-chakra-ui&project-name=with-chakra-ui&repository-name=with-chakra-ui)
-
-## How to use
-
-### Using `create-next-app`
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+- Clone this project
+- Rename env.local.example to env.local
+- Change the env value to this
 
 ```bash
-npx create-next-app --example with-chakra-ui with-chakra-ui-app
+BASE_URL=https://fakestoreapi.com
+BASE_SOURCE=/api-evermos
 ```
+
+- Install & Run
 
 ```bash
-yarn create next-app --example with-chakra-ui with-chakra-ui-app
+yarn
+yarn dev
 ```
+
+## Live Demo
+
+Live demo can be found [here](https://evermos-tech.vercel.app/)
+
+## Login Account
+
+You can use this account
 
 ```bash
-pnpm create next-app --example with-chakra-ui with-chakra-ui-app
+username: johnd
+password: m38rmF$
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Or you can visit [this website](https://fakestoreapi.com/docs) and get other user credentials to use
 
-## Notes
+## Testing
 
-Chakra has supported Gradients and RTL in `v1.1`. To utilize RTL, [add RTL direction and swap](https://chakra-ui.com/docs/features/rtl-support).
+The test files are inside the relevant components.
 
-If you don't have multi-direction app, you should make `<Html lang="ar" dir="rtl">` inside `_document.ts`.
+```bash
+SomeComponent           # <- folder
+    - index.tsx         # <- the component
+    - index.spec.tsx    # <- the test
+```
+
+Run the tests with
+
+```bash
+yarn test
+```

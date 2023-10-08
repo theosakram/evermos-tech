@@ -5,7 +5,7 @@
     "build": "next build",
     "start": "next start",
     "cypress:open": "cypress open",
-    "test": "jest --verbose --coverage",
+    "test": "jest --verbose",
     "lint": "eslint ."
   },
   "dependencies": {
