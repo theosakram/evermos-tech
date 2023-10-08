@@ -18,7 +18,7 @@ export const ProductsContainer = () => {
 
   return (
     <VStack w="100%" p="1rem" spacing="1rem">
-      <SimpleGrid columns={5} spacing="1rem">
+      <SimpleGrid columns={{ lg: 3, xl: 5 }} spacing="1rem">
         {data?.map((datum) => (
           <ProductCard
             key={datum.id}
