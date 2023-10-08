@@ -33,7 +33,8 @@ const ProductDetailPage = () => {
     { id: +query.id },
     { enabled: !!query.id && !isNaN(+query.id) },
   );
-  const { getProductsId, incAmount, decAmount, removeProduct } = useCartStore();
+  const { getProductsId, incAmount, decAmount, removeProduct, addProduct } =
+    useCartStore();
 
   if (isLoading) {
     return <Loader />;
@@ -89,7 +90,15 @@ const ProductDetailPage = () => {
             >
               <NumberInputField />
               <NumberInputStepper>
-                <NumberIncrementStepper onClick={() => incAmount(data?.id)} />
+                <NumberIncrementStepper
+                  onClick={() => {
+                    if (getProductsId().get(data?.id)) {
+                      return incAmount(data?.id);
+                    }
+
+                    addProduct(data);
+                  }}
+                />
                 <NumberDecrementStepper
                   onClick={() => {
                     if (getProductsId().get(data?.id) - 1 === 0) {
