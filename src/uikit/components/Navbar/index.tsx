@@ -225,6 +225,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           <Text
             fontWeight={600}
             color={useColorModeValue('gray.600', 'gray.200')}
+            textTransform="capitalize"
           >
             {label}
           </Text>

@@ -1,25 +1,29 @@
 import { SimpleGrid, VStack } from '@chakra-ui/react';
 
 import { useCartStore } from '@/modules/cart/cartStore';
-import { useGetAllProducts } from '@/modules/products/productHooks';
+import type { Product } from '@/modules/products/productTypes';
 import { useToast } from '@/shared/hooks/useToast';
 import { Loader } from '@/uikit/components/Loader';
 import { ProductCard } from '@/uikit/components/ProductCard';
 
-export const ProductsContainer = () => {
-  const { data, isLoading } = useGetAllProducts();
+export type ProductsContainerProps = {
+  data: Array<Product>;
+  isLoading?: boolean;
+};
+
+export const ProductsContainer = (props: ProductsContainerProps) => {
   const { addProduct, getProductsId, incAmount, decAmount, removeProduct } =
     useCartStore();
   const { toast } = useToast();
 
-  if (isLoading) {
+  if (props.isLoading) {
     return <Loader />;
   }
 
   return (
     <VStack w="100%" p="1rem" spacing="1rem">
       <SimpleGrid columns={{ lg: 3, xl: 5 }} spacing="1rem">
-        {data?.map((datum) => (
+        {props.data?.map((datum) => (
           <ProductCard
             key={datum.id}
             id={datum.id}

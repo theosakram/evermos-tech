@@ -4,6 +4,7 @@ import type {
   GetAllProductRequest,
   GetAllProductResponse,
   GetProductByIdRequest,
+  GetProductsByCategoryRequest,
 } from './productTypes';
 
 export const getALlProducts = (payload?: GetAllProductRequest) => {
@@ -17,6 +18,15 @@ export const getALlProducts = (payload?: GetAllProductRequest) => {
 export const getProductById = (payload: GetProductByIdRequest) => {
   return fetcher({
     url: `/products/${payload.id}`,
+    params: { method: 'get' },
+  });
+};
+
+export const getProductsByCategory = (
+  payload: GetProductsByCategoryRequest,
+) => {
+  return fetcher<GetAllProductResponse>({
+    url: `/products/category/${payload.category}`,
     params: { method: 'get' },
   });
 };

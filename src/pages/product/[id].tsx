@@ -1,32 +1,30 @@
 import {
   Box,
-  Button,
   Center,
   Divider,
-  FormControl,
-  FormErrorMessage,
+  Flex,
   HStack,
   Icon,
   Img,
-  Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   SimpleGrid,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
 import { AiFillStar } from 'react-icons/ai';
 
 import { useRouter } from 'next/router';
 
+import { useCartStore } from '@/modules/cart/cartStore';
 import { useGetProductById } from '@/modules/products/productHooks';
 import { Loader } from '@/uikit/components/Loader';
 
 type PageQuery = {
   id: string;
-};
-
-type FormData = {
-  amount: number;
 };
 
 const ProductDetailPage = () => {
@@ -35,28 +33,30 @@ const ProductDetailPage = () => {
     { id: +query.id },
     { enabled: !!query.id && !isNaN(+query.id) },
   );
-
-  const {
-    register,
-    formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      amount: 0,
-    },
-  });
+  const { getProductsId, incAmount, decAmount, removeProduct } = useCartStore();
 
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <SimpleGrid w="100%" columns={2} h="100vh">
-      <Center>
-        <Img src={data?.image} h="35rem" />
+    <SimpleGrid
+      w="100%"
+      columns={{ sm: 2 }}
+      h="100vh"
+      gap="1rem"
+      display={{ base: 'flex', sm: 'grid' }}
+      flexDir="column"
+    >
+      <Center h={{ base: '25rem', sm: 'inherit' }}>
+        <Img
+          src={data?.image}
+          h={{ base: '20rem', sm: '25rem', md: '35rem' }}
+        />
       </Center>
-      <Center w="100%">
-        <VStack w="100%" align="start" spacing="1rem">
-          <Text as="b" fontSize="2.5rem" w="85%">
+      <Flex w="100%" align={{ base: 'start', sm: 'center' }}>
+        <VStack w="100%" align={{ base: 'center', md: 'start' }} spacing="1rem">
+          <Text as="b" fontSize={{ sm: '1.5rem', md: '2.5rem' }} w="85%">
             {data?.title}
           </Text>
 
@@ -80,27 +80,32 @@ const ProductDetailPage = () => {
           </Text>
 
           <HStack spacing="1rem">
-            <FormControl isInvalid={!!errors.amount} w="10rem">
-              <Input
-                id="amount"
-                placeholder="Qty"
-                type="number"
-                borderColor="gray.400"
-                bg="white"
-                {...register('amount', {
-                  required: 'Cannot be zero',
-                  min: 1,
-                })}
-              />
-              <FormErrorMessage>
-                {errors.amount && errors.amount.message}
-              </FormErrorMessage>
-            </FormControl>
+            <NumberInput
+              value={getProductsId().get(data?.id) || 0}
+              min={0}
+              max={99}
+              w="5rem"
+              isReadOnly
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper onClick={() => incAmount(data?.id)} />
+                <NumberDecrementStepper
+                  onClick={() => {
+                    if (getProductsId().get(data?.id) - 1 === 0) {
+                      return removeProduct(data?.id);
+                    }
 
-            <Button colorScheme="blue">Add to cart</Button>
+                    decAmount(data?.id);
+                  }}
+                />
+              </NumberInputStepper>
+            </NumberInput>
+
+            <Text>In Cart</Text>
           </HStack>
         </VStack>
-      </Center>
+      </Flex>
     </SimpleGrid>
   );
 };

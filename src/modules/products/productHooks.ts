@@ -3,11 +3,16 @@ import { useQuery } from 'react-query';
 
 import { queryKeys } from '@/shared/constants';
 
-import { getALlProducts, getProductById } from './productServices';
+import {
+  getALlProducts,
+  getProductById,
+  getProductsByCategory,
+} from './productServices';
 import type {
   GetAllProductRequest,
   GetAllProductResponse,
   GetProductByIdRequest,
+  GetProductsByCategoryRequest,
   Product,
 } from './productTypes';
 
@@ -39,6 +44,22 @@ export const useGetProductById = (
   return useQuery(
     [queryKeys.GET_PRODUCT_BY_ID, payload],
     () => getProductById(payload),
+    options,
+  );
+};
+
+export const useGetProductsByCategory = (
+  payload: GetProductsByCategoryRequest,
+  options?: UseQueryOptions<
+    GetAllProductResponse,
+    unknown,
+    GetAllProductResponse,
+    Array<string | GetProductsByCategoryRequest>
+  >,
+) => {
+  return useQuery(
+    [queryKeys.GET_PRODUCTS_BY_CATEGORY, payload],
+    () => getProductsByCategory(payload),
     options,
   );
 };

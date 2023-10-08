@@ -22,3 +22,7 @@ export type GetAllProductRequest = {
 export type GetProductByIdRequest = {
   id: number;
 };
+
+export type GetProductsByCategoryRequest = {
+  category: string;
+};
