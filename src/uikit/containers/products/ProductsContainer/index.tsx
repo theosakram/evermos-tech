@@ -8,7 +8,8 @@ import { ProductCard } from '@/uikit/components/ProductCard';
 
 export const ProductsContainer = () => {
   const { data, isLoading } = useGetAllProducts();
-  const { addProduct, getProductsId, incAmount, decAmount } = useCartStore();
+  const { addProduct, getProductsId, incAmount, decAmount, removeProduct } =
+    useCartStore();
   const { toast } = useToast();
 
   if (isLoading) {
@@ -32,7 +33,13 @@ export const ProductsContainer = () => {
                 getProductsId().get(datum.id) > 0,
               amount: getProductsId().get(datum.id),
               onIncClick: () => incAmount(datum.id),
-              onDecClick: () => decAmount(datum.id),
+              onDecClick: () => {
+                if (getProductsId().get(datum.id) - 1 === 0) {
+                  return removeProduct(datum.id);
+                }
+
+                decAmount(datum.id);
+              },
             }}
             onCartButtonClick={() => {
               addProduct(datum);
