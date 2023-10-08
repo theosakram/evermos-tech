@@ -18,7 +18,7 @@ export const LoginGuard = (props: PropsWithChildren) => {
   }, [router, token]);
 
   if (token || router.pathname === '/login') {
-    return props.children;
+    return <>{props.children}</>;
   }
 
   return <Loader />;
